@@ -11,7 +11,9 @@ describe('CharacterOptionsController', () => {
       providers: [CharacterOptionsService],
     }).compile();
 
-    controller = module.get<CharacterOptionsController>(CharacterOptionsController);
+    controller = module.get<CharacterOptionsController>(
+      CharacterOptionsController,
+    );
   });
 
   it('should be defined', () => {

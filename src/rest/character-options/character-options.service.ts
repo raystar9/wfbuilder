@@ -9,8 +9,8 @@ import { CharacterOption } from './entities/character-option.entity';
 export class CharacterOptionsService {
   constructor(
     @InjectRepository(CharacterOption)
-    private characterOptionRepository: Repository<CharacterOption>
-  ){}
+    private characterOptionRepository: Repository<CharacterOption>,
+  ) {}
 
   create(createCharacterOptionDto: CreateCharacterOptionDto) {
     return 'This action adds a new characterOption';

@@ -1,7 +1,17 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query
+} from '@nestjs/common';
 import { DecksService } from './decks.service';
 import { CreateDeckDto } from './dto/create-deck.dto';
 import { UpdateDeckDto } from './dto/update-deck.dto';
+import { SelectAllDeckDto } from './dto/select-all-deck.dto';
 
 @Controller('rest/decks')
 export class DecksController {
@@ -13,8 +23,9 @@ export class DecksController {
   }
 
   @Get()
-  findAll() {
-    return this.decksService.findAll();
+  findAll(@Query() params) {
+    console.log(params)
+    return this.decksService.findAll(params);
   }
 
   @Get(':id')

@@ -1,11 +1,21 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { CharacterOptionsService } from './character-options.service';
 import { CreateCharacterOptionDto } from './dto/create-character-option.dto';
 import { UpdateCharacterOptionDto } from './dto/update-character-option.dto';
 
 @Controller('rest/character-options')
 export class CharacterOptionsController {
-  constructor(private readonly characterOptionsService: CharacterOptionsService) {}
+  constructor(
+    private readonly characterOptionsService: CharacterOptionsService,
+  ) {}
 
   @Post()
   create(@Body() createCharacterOptionDto: CreateCharacterOptionDto) {
@@ -23,7 +33,10 @@ export class CharacterOptionsController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCharacterOptionDto: UpdateCharacterOptionDto) {
+  update(
+    @Param('id') id: string,
+    @Body() updateCharacterOptionDto: UpdateCharacterOptionDto,
+  ) {
     return this.characterOptionsService.update(+id, updateCharacterOptionDto);
   }
 

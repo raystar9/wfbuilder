@@ -14,20 +14,32 @@ import { Character } from './rest/characters/entities/character.entity';
 import { CharacterOption } from './rest/character-options/entities/character-option.entity';
 import { Code } from './rest/codes/entities/code.entity';
 import { Deck } from './rest/decks/entities/deck.entity';
+import { DeckCodesModule } from './rest/deck-codes/deck-codes.module';
+import { DeckCode } from './rest/deck-codes/entities/deck-code.entity';
 
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      host:"database-2.cerscfse83w3.ap-northeast-2.rds.amazonaws.com",
-      port:7492,
-      username:"WF_USER",
-      password:"123",
-      type: "mysql",
-      database:"WF",
+      host: 'database-2.cerscfse83w3.ap-northeast-2.rds.amazonaws.com',
+      port: 7492,
+      username: 'WF_USER',
+      password: '123',
+      type: 'mysql',
+      database: 'WF',
       autoLoadEntities: true,
-      synchronize: true, 
+      synchronize: true,
       logging: true,
-      entities:[Item, ItemOption, Character, CharacterOption, Code, Deck]
+      entities: [
+        Item,
+        ItemOption,
+        Character,
+        CharacterOption,
+        Code,
+        Deck,
+        DeckCode,
+      ],
+      //dropSchema: true,
+      charset:"utf8",
     }),
     CodesModule,
     CharactersModule,
@@ -35,6 +47,7 @@ import { Deck } from './rest/decks/entities/deck.entity';
     ItemsModule,
     CharacterOptionsModule,
     ItemOptionsModule,
+    DeckCodesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

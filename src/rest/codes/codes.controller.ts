@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { CodesService } from './codes.service';
 import { CreateCodeDto } from './dto/create-code.dto';
 import { UpdateCodeDto } from './dto/update-code.dto';
@@ -18,9 +27,14 @@ export class CodesController {
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.codesService.findOne(+id);
+  findCodes(@Param('id') codeKind: string) {
+    return this.codesService.findCodes(codeKind);
   }
+
+  // @Get(':id')
+  // findOne(@Param('id') codeKind: string, @Query() key:string) {
+  //   return this.codesService.findOne(codeKind, key);
+  // }
 
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCodeDto: UpdateCodeDto) {

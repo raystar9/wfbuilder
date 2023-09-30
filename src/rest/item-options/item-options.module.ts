@@ -5,7 +5,7 @@ import { ItemOption } from './entities/item-option.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 @Module({
-  imports:[TypeOrmModule.forFeature([ItemOption])],
+  imports: [TypeOrmModule.forFeature([ItemOption])],
   controllers: [ItemOptionsController],
   providers: [ItemOptionsService],
 })

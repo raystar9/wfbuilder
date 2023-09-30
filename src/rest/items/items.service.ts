@@ -9,8 +9,8 @@ import { Repository } from 'typeorm';
 export class ItemsService {
   constructor(
     @InjectRepository(Item)
-    private itemRepository: Repository<Item>
-  ){}
+    private itemRepository: Repository<Item>,
+  ) {}
 
   create(createItemDto: CreateItemDto) {
     return 'This action adds a new item';

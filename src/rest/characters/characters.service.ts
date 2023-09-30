@@ -9,26 +9,36 @@ import { Character } from './entities/character.entity';
 export class CharactersService {
   constructor(
     @InjectRepository(Character)
-    private characterRepository: Repository<Character>
-  ){}
+    private characterRepository: Repository<Character>,
+  ) {
+    characterRepository.create();
+  }
 
-  create(createCharacterDto: CreateCharacterDto) {
-    return 'This action adds a new character';
+  async create(createCharacterDto: CreateCharacterDto) {
+    const res = await this.characterRepository.findOneBy({id:createCharacterDto.id});
+    if(!res) {
+      this.characterRepository.save(createCharacterDto);
+    }
   }
 
   findAll() {
-    return `This action returns all characters`;
+    const queryRunner = this.characterRepository.createQueryBuilder("character");
+    queryRunner.orderBy("stars desc, type, id")
+    return queryRunner.getMany();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} character`;
+  findOne(id: string) {
+    return this.characterRepository.findBy({id});
   }
 
-  update(id: number, updateCharacterDto: UpdateCharacterDto) {
-    return `This action updates a #${id} character`;
+  async update(id: string, updateCharacterDto: UpdateCharacterDto) {
+    const res = await this.characterRepository.findOneBy({id:updateCharacterDto.id});
+    if(res) {
+      this.characterRepository.save(updateCharacterDto);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} character`;
+  remove(id: string) {
+    this.characterRepository.delete({id});
   }
 }
