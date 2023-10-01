@@ -32,22 +32,22 @@ export class Deck {
   @Column({ length: 6, nullable: true })
   u3: string;
 
-  @Column({ length: 6, nullable: true })
+  @Column({ length: 7, nullable: true })
   e1: string;
 
-  @Column({ length: 6, nullable: true })
+  @Column({ length: 7, nullable: true })
   e2: string;
 
-  @Column({ length: 6, nullable: true })
+  @Column({ length: 7, nullable: true })
   e3: string;
 
-  @Column({ length: 6, nullable: true })
+  @Column({ length: 7, nullable: true })
   s1: string;
 
-  @Column({ length: 6, nullable: true })
+  @Column({ length: 7, nullable: true })
   s2: string;
 
-  @Column({ length: 6, nullable: true })
+  @Column({ length: 7, nullable: true })
   s3: string;
 
   @Column({ length: 6, nullable: true })

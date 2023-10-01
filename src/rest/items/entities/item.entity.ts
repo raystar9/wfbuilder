@@ -1,10 +1,11 @@
-import { Column, PrimaryColumn } from 'typeorm';
+import { Column, Entity, PrimaryColumn } from 'typeorm';
 
+@Entity()
 export class Item {
-  @PrimaryColumn({ length: 6 })
+  @PrimaryColumn({ length: 7 })
   id: string;
 
-  @Column({ length: 30 })
+  @Column({ length: 50,  charset: 'utf8mb4', collation: 'utf8mb4_unicode_ci', })
   name: string;
 
   @Column({ length: 1 })

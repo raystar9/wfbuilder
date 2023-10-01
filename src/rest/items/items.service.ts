@@ -10,14 +10,16 @@ export class ItemsService {
   constructor(
     @InjectRepository(Item)
     private itemRepository: Repository<Item>,
-  ) {}
+  ) {
+    itemRepository.create();
+  }
 
   create(createItemDto: CreateItemDto) {
-    return 'This action adds a new item';
+    return this.itemRepository.save(createItemDto);
   }
 
   findAll() {
-    return `This action returns all items`;
+    return this.itemRepository.find();
   }
 
   findOne(id: number) {
