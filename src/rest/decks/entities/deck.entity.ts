@@ -53,6 +53,9 @@ export class Deck {
   @Column({ length: 6, nullable: true })
   deckCode?: string;
 
+  @Column({ length: 200, nullable: true , charset: 'utf8mb4', collation: 'utf8mb4_unicode_ci',})
+  comment?: string;
+
   @CreateDateColumn()
   regDate:Date;
 
