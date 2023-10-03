@@ -19,7 +19,11 @@ export class ItemsService {
   }
 
   findAll() {
-    return this.itemRepository.find();
+    const queryBuilder = this.itemRepository.createQueryBuilder("item");
+    let date = new Date();
+    date.setDate(date.getDate() + 7)
+    queryBuilder.where("releaseDate < :date", {date})
+    return queryBuilder.getMany();
   }
 
   findOne(id: number) {

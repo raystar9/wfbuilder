@@ -13,4 +13,10 @@ export class Item {
 
   @Column({ length: 50,  charset: 'utf8mb4', collation: 'utf8mb4_unicode_ci', })
   name: string;
+
+  @Column() 
+  releaseDate: Date;
+
+  @Column({length:1})
+  playable: string;
 }
