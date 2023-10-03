@@ -23,6 +23,9 @@ export class CharactersService {
 
   findAll() {
     const queryRunner = this.characterRepository.createQueryBuilder("character");
+    const date = new Date()
+    date.setDate(date.getDate() - 7)
+    queryRunner.where("releaseDate < :date", {date})
     queryRunner.orderBy("stars desc, type, id")
     return queryRunner.getMany();
   }
