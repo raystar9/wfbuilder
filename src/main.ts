@@ -3,7 +3,9 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-  app.enableCors();
+  app.enableCors({
+    origin: ["http://localhost:3002", "http://www.wf-builder.kro.kr"]
+  });
   await app.listen(3000);
 }
 bootstrap();
