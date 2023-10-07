@@ -14,6 +14,9 @@ export class Deck {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column({ length: 30, nullable: true, charset: 'utf8mb4', collation: 'utf8mb4_unicode_ci' })
+  title: string;
+
   @Column({ length: 6, nullable: true })
   m1: string;
 
@@ -53,29 +56,29 @@ export class Deck {
   @Column({ length: 6, nullable: true })
   deckCode?: string;
 
-  @Column({ length: 200, nullable: true , charset: 'utf8mb4', collation: 'utf8mb4_unicode_ci',})
+  @Column({ length: 200, nullable: true, charset: 'utf8mb4', collation: 'utf8mb4_unicode_ci', })
   comment?: string;
 
   @CreateDateColumn()
-  regDate:Date;
+  regDate: Date;
 
   @UpdateDateColumn()
-  lstModDate:Date;
+  lstModDate: Date;
 
   @ManyToMany(() => Code)
   @JoinTable({
-    name:"deck_code",
-    joinColumns:[{
-      name:"deckId",
-      referencedColumnName:"id"
+    name: "deck_code",
+    joinColumns: [{
+      name: "deckId",
+      referencedColumnName: "id"
     }],
-    inverseJoinColumns:[{
-      name:"codeKind",
-      referencedColumnName:"codeKind"
-    },{
-      name:"codeKey",
-      referencedColumnName:"key"
+    inverseJoinColumns: [{
+      name: "codeKind",
+      referencedColumnName: "codeKind"
+    }, {
+      name: "codeKey",
+      referencedColumnName: "key"
     }],
   })
-  codes?:Code[]
+  codes?: Code[]
 }

@@ -1,6 +1,7 @@
 export class CreateDeckDto {
   deck: {
     id: number
+    title:string
     m1: string
     m2: string
     m3: string
@@ -14,7 +15,7 @@ export class CreateDeckDto {
     s2: string
     s3: string
     deckCode:string
-    //comments?:string
+    comments?:string
   }
   codes: {
     id:string
