@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateDeckDto } from './dto/create-deck.dto';
 import { UpdateDeckDto } from './dto/update-deck.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Deck } from './entities/deck.entity';
 import { DeckCodesService } from '../deck-codes/deck-codes.service';
 import { DeckCode } from '../deck-codes/entities/deck-code.entity';
@@ -26,6 +26,9 @@ export class DecksService {
   }
 
   async findAll(selectAllDeckDto:SelectAllDeckDto) {
+    const take = 20;
+    const skip = selectAllDeckDto.page? (+selectAllDeckDto.page - 1) * take: 0
+    console.log(selectAllDeckDto)
     const queryBuilder = this.deckRepository.createQueryBuilder("deck");
     const codeKindList = [];
     const codeKeyList = [];
@@ -57,9 +60,14 @@ export class DecksService {
       ids.push(res[i].id)
     }
     if(ids.length) {
-      const queryBuilder2 = this.deckRepository.createQueryBuilder("deck");
+      return this.deckRepository.find({
+        where:[{id: In([...ids])}],
+        take,
+        skip
+      })
+      // const queryBuilder2 = this.deckRepository.createQueryBuilder("deck");
       // queryBuilder.leftJoinAndSelect("deck.codes", "code","code.codeKind IN('01', '02', '03')");
-      return queryBuilder2.where("deck.id in(:...ids)", {ids}).getMany();
+      // return queryBuilder2.where("deck.id in(:...ids)", {ids}).getMany();
     } else {
       return [];
     }
