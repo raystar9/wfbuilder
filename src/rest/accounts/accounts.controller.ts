@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
 import { AccountsService } from './accounts.service';
 import { CreateAccountDto } from './dto/create-account.dto';
 import { UpdateAccountDto } from './dto/update-account.dto';
@@ -12,14 +12,9 @@ export class AccountsController {
     return this.accountsService.create(createAccountDto);
   }
 
-  @Get()
-  findAll() {
-    return this.accountsService.findAll();
-  }
-
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.accountsService.findOne(+id);
+  findOne(@Param('id') id: string, @Query() password:string) {
+    return this.accountsService.validate(id, password);
   }
 
   @Patch(':id')

@@ -1,3 +1,4 @@
+import { Account } from 'src/rest/accounts/entities/account.entity';
 import { Code } from 'src/rest/codes/entities/code.entity';
 import {
   Column,
@@ -5,6 +6,7 @@ import {
   Entity,
   JoinTable,
   ManyToMany,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -81,4 +83,10 @@ export class Deck {
     }],
   })
   codes?: Code[]
+
+  @ManyToOne(() => Account)
+  account:Account
+  
+  @ManyToOne(() => Account)
+  refAccount:Account
 }
