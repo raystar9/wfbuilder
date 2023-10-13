@@ -18,6 +18,14 @@ export class AccountsService {
     this.accountRepository.save(createAccountDto);
   }
 
+  update(id: number, updateAccountDto: UpdateAccountDto) {
+    return `This action updates a #${id} account`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} account`;
+  }
+
   async validate(id:string, password:string) {
     const res = await this.accountRepository.findOneBy({id, password});
     if(res) {
@@ -27,11 +35,26 @@ export class AccountsService {
     }
   }
 
-  update(id: number, updateAccountDto: UpdateAccountDto) {
-    return `This action updates a #${id} account`;
+  async findMyDecks(id:string, page:number) {
+    return await this.accountRepository.createQueryBuilder("account")
+      .leftJoinAndSelect("account.decks", "deck")
+      .select("account.id")
+      .addSelect("deck.id")
+      .addSelect("deck.m1")
+      .addSelect("deck.m2")
+      .addSelect("deck.m3")
+      .where("account.id = :id", {id});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} account`;
+  async findRefDecks(id:string, refId:string, page:number) {
+    return await this.accountRepository.createQueryBuilder("account")
+      .leftJoinAndSelect("account.decks", "deck")
+      .select("account.id")
+      .addSelect("deck.id")
+      .addSelect("deck.m1")
+      .addSelect("deck.m2")
+      .addSelect("deck.m3")
+      .where("account.id = :id", {id})
+      .andWhere("deck.refAccountId IS NOT NULL")
   }
 }

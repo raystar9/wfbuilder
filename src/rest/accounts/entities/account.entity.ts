@@ -1,15 +1,16 @@
 import { Character } from "src/rest/characters/entities/character.entity"
 import { Deck } from "src/rest/decks/entities/deck.entity"
-import { Column, JoinTable, ManyToMany, OneToMany, PrimaryColumn } from "typeorm"
+import { Session } from "src/rest/sessions/entities/session.entity"
+import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne, PrimaryColumn } from "typeorm"
 
+@Entity('account')
 export class Account {
-    @PrimaryColumn()
+    @PrimaryColumn({length:36})
     id:string
-    @Column()
+    @Column({length:36})
     password:string
-    @Column()
+    @Column({length:36})
     nickName:string
-
     @ManyToMany(() => Character)
     @JoinTable({
         name:"character_pool",
@@ -18,21 +19,12 @@ export class Account {
     })
     characters:Character[]
 
-    @OneToMany(() => Deck, deck => deck.id)
+    @OneToMany(() => Deck, deck => deck.account)
     decks:Deck[]
-    // @ManyToMany(() => Deck)
-    // @JoinTable({
-    //     name:"account_deck",
-    //     joinColumn:{name:"accountId", referencedColumnName:"id"},
-    //     inverseJoinColumn:{name:"deckId", referencedColumnName:"id"}
-    // })
-    // decks:Deck[]
 
-    // @ManyToMany(() => Deck)
-    // @JoinTable({
-    //     name:"account_deck_request",
-    //     joinColumns:[{name:"accountId", referencedColumnName:"id"}, {name:"refAccountId", referencedColumnName:"id"}],
-    //     inverseJoinColumns:[{name:"deckId", referencedColumnName:"id"}]
-    // })
-    // requestDecks:Deck[]
+    @OneToMany(() => Deck, deck => deck.refAccount)
+    refDecks:Deck[]
+
+    // @OneToOne(() => Session)
+    // session:Session;
 }

@@ -1,9 +1,12 @@
+import { MyDecks } from 'src/rest/accounts/dto/my-decks.dto';
+import { RefDecks } from 'src/rest/accounts/dto/ref-decks.entity';
 import { Account } from 'src/rest/accounts/entities/account.entity';
 import { Code } from 'src/rest/codes/entities/code.entity';
 import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   JoinTable,
   ManyToMany,
   ManyToOne,
@@ -65,7 +68,7 @@ export class Deck {
   regDate: Date;
 
   @UpdateDateColumn()
-  lstModDate: Date;
+  lstModDate: Date; 
 
   @ManyToMany(() => Code)
   @JoinTable({
@@ -84,9 +87,10 @@ export class Deck {
   })
   codes?: Code[]
 
-  @ManyToOne(() => Account)
+  @ManyToOne(() => Account, account => account.decks)
+  @JoinColumn({name:"accountId"})
   account:Account
   
-  @ManyToOne(() => Account)
+  @ManyToOne(() => Account, account => account.refDecks)
   refAccount:Account
 }

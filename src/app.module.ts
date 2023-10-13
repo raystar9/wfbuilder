@@ -16,6 +16,9 @@ import { Code } from './rest/codes/entities/code.entity';
 import { Deck } from './rest/decks/entities/deck.entity';
 import { DeckCodesModule } from './rest/deck-codes/deck-codes.module';
 import { DeckCode } from './rest/deck-codes/entities/deck-code.entity';
+import { AccountsModule } from './rest/accounts/accounts.module';
+import { SessionsModule } from './rest/sessions/sessions.module';
+import { Account } from './rest/accounts/entities/account.entity';
 
 @Module({
   imports: [
@@ -37,6 +40,7 @@ import { DeckCode } from './rest/deck-codes/entities/deck-code.entity';
         Code,
         Deck,
         DeckCode,
+        Account,
       ],
       //dropSchema: true,
       charset:"utf8",
@@ -48,6 +52,8 @@ import { DeckCode } from './rest/deck-codes/entities/deck-code.entity';
     CharacterOptionsModule,
     ItemOptionsModule,
     DeckCodesModule,
+    AccountsModule,
+    SessionsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
