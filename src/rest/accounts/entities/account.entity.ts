@@ -7,10 +7,12 @@ import { Column, Entity, JoinColumn, JoinTable, ManyToMany, OneToMany, OneToOne,
 export class Account {
     @PrimaryColumn({length:36})
     id:string
-    @Column({length:36})
+    @Column({length:64})
     password:string
-    @Column({length:36})
+    @Column({length:12, charset: 'utf8mb4', collation: 'utf8mb4_unicode_ci'})
     nickName:string
+    @Column({length:320, nullable:true})
+    email:string
     @ManyToMany(() => Character)
     @JoinTable({
         name:"character_pool",

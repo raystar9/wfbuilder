@@ -19,6 +19,7 @@ import { DeckCode } from './rest/deck-codes/entities/deck-code.entity';
 import { AccountsModule } from './rest/accounts/accounts.module';
 import { SessionsModule } from './rest/sessions/sessions.module';
 import { Account } from './rest/accounts/entities/account.entity';
+import { EncryptService } from './service/encrypt/encrypt.service';
 
 @Module({
   imports: [
@@ -56,6 +57,6 @@ import { Account } from './rest/accounts/entities/account.entity';
     SessionsModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, EncryptService],
 })
 export class AppModule {}

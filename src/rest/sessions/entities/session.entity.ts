@@ -1,14 +1,15 @@
 import { Account } from "src/rest/accounts/entities/account.entity";
-import { Column, Entity, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, JoinColumn, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn, RelationId } from "typeorm";
 
 @Entity()
 export class Session {
-    @PrimaryGeneratedColumn()
-    id:number;
+    @PrimaryColumn({length:36})
+    @RelationId((session:Session) => session.account)
+    id:string;
 
-    @OneToOne(() => Account, )
-    @JoinColumn({name:"accountId"})
-    accountId:string
+    @OneToOne(() => Account,)
+    @JoinColumn({name:"id"})
+    account:Account
 
     @Column({length:36})
     sessionKey:string;
